@@ -15,11 +15,17 @@ class Player2 {
         this.vx = 0;
         this.vy = 0;
 
-        this.floor = CANVAS_H - this.h - 50;
+        this.floor = CANVAS_H - this.h - 30;
         
     }
 
+    groundTo (groundY) {
+        this.y = groundY - this.h
+        this.ground = groundY
+    }
 
+
+    
     onKeyEvent (event) {
         const isPressed = event.type === 'keydown';
         switch (event.keyCode) {

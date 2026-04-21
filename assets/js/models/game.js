@@ -8,8 +8,15 @@ class Game {
         this.canvas.width = CANVAS_W;
         this.canvas.height = CANVAS_H;
 
-        this.player1 = new Player1(this.ctx, 50, 300);
+        this.player1 = new Player1(this.ctx, 50, 280);
+        this.player1.groundTo(this.canvas.height - BG_FLOOR)
+
+
         this.player2 = new Player2(this.ctx, 700, 300);
+        this.player2.groundTo(this.canvas.height - BG_FLOOR)
+
+
+        this.background = new Background(this.ctx)
 
         this.drawIntervalID = undefined;
         this.fps = FPS;
@@ -52,13 +59,19 @@ class Game {
 
     }
 
-    checkBounds() {
+    checkBounds() { //esto es para que no se me salga de la pantalla
         if (this.player1.x < 0) {
             this.player1.x = 0;
         }
         if (this.player1.x + this.player1.w > this.canvas.width) {
             this.player1.x = this.canvas.width - this.player1.w;
         }
+
+        if (this.player2.x < 0) {
+            this.player2.x = 0;
+        }
+        if (this.player2.x + this.player2.w > this.canvas.width)
+            this.player2.x = this.canvas.width - this.player2.w;
 
     }
 
@@ -67,6 +80,7 @@ class Game {
     }
 
     draw () {
+        this.background.draw(); 
         this.player1.draw();
         this.player2.draw();
     }
