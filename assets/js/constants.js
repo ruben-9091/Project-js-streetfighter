@@ -1,7 +1,10 @@
 
 // constantes de archivos
 const BACKGR_MAIN = "/assets/images/backgrounds/congreso de los diputados.png"
-const PLAYER1_SPRITE = "/assets/images/Sprites/Main-character/sprite-ruben.png"
+const PLAYER1_RIGHT_SPRITE = "/assets/images/Sprites/Main-character/ryu-right-character.png"
+const PLAYER1_LEFT_SPRITE = "/assets/images/Sprites/Main-character/ryu-left-character.png"
+const PLAYER2_LEFT_SPRITE = "/assets/images/Sprites/Main-character/ken-left-character.png"
+const PLAYER2_RIGHT_SPRITE = "/assets/images/Sprites/Main-character/ken-right-character.png"
 
 
 
@@ -11,11 +14,12 @@ const FPS = 1000/60;
 const CANVAS_W = 1200;
 const CANVAS_H = 800;
 
-const PLAYER1_H = 275
-const PLAYER1_W = 170;// esto es para la imagen 
+// esto es para las imagenes
+const PLAYER1_H = 93
+const PLAYER1_W = 108;
 
-const PLAYER2_H = 275
-const PLAYER2_W = 170;
+const PLAYER2_H = 93;
+const PLAYER2_W = 108;
 
 
 

@@ -6,8 +6,8 @@ class Player1 {
         this.x = x;
         this.y = y;
 
-        this.w = PLAYER1_W / 1.2;
-        this.h = PLAYER1_H / 1.2;
+        this.w = PLAYER1_W * 2.5;
+        this.h = PLAYER1_H * 2.5;
       
 
         this.vx = 0;
@@ -18,19 +18,32 @@ class Player1 {
         this.gravity = 0.5;
         this.jumpStrength = -10;
 
-        this.sprite = new Image();
-        this.sprite.src = PLAYER1_SPRITE;
-        this.sprite.vFrames = 2; 
-        this.sprite.hFrames = 3; 
-        this.sprite.vFramesIndex = 0;
-        this.sprite.hFramesIndex = 0; 
-        this.sprite.onload = () => {
-            this.sprite.isReady = true;
-            this.sprite.frameW = Math.floor(this.sprite.width / this.sprite.vFrames)
-            this.sprite.frameH = Math.floor(this.sprite.height / this.sprite.hFrames)
+        this.spriteRight = new Image();
+        this.spriteRight.src = PLAYER1_RIGHT_SPRITE;
+        this.spriteRight.vFrames = 3; 
+        this.spriteRight.hFrames = 3; 
+        this.spriteRight.vFramesIndex = 0;
+        this.spriteRight.hFramesIndex = 0; 
+        this.spriteRight.onload = () => {
+            this.spriteRight.isReady = true;
+            this.spriteRight.frameW = Math.floor(this.spriteRight.width / this.spriteRight.vFrames)
+            this.spriteRight.frameH = Math.floor(this.spriteRight.height / this.spriteRight.hFrames)
+        }
+
+        this.spriteLeft = new Image();
+        this.spriteLeft.src = PLAYER1_LEFT_SPRITE;
+        this.spriteLeft.vFrames = 3; 
+        this.spriteLeft.hFrames = 3; 
+        this.spriteLeft.vFramesIndex = 0;
+        this.spriteLeft.hFramesIndex = 0; 
+        this.spriteLeft.onload = () => {
+            this.spriteLeft.isReady = true;
+            this.spriteLeft.frameW = Math.floor(this.spriteLeft.width / this.spriteLeft.vFrames)
+            this.spriteLeft.frameH = Math.floor(this.spriteLeft.height / this.spriteLeft.hFrames)
         }
 
 
+        this.sprite = this.spriteRight;
         this.drawCount = 0; 
 
 
@@ -46,6 +59,7 @@ class Player1 {
         switch (event.keyCode) {
             case KEY_LEFT:
                 if (isPressed) {
+                    this.sprite = this.spriteLeft;
                     this.vx = -player1VX;
                 } else {
                     this.vx = 0;
@@ -54,6 +68,7 @@ class Player1 {
 
             case KEY_RIGHT:
                 if (isPressed) {
+                    this.sprite = this.spriteRight;
                     this.vx = player1VX;
                 } else {
                     this.vx = 0;
@@ -107,7 +122,7 @@ class Player1 {
 
         if (this.isJumping) {
             this.sprite.vFramesIndex = 0; 
-            this.sprite.hFramesIndex = 2; 
+            this.sprite.hFramesIndex = 1; 
             return;
             } 
          
