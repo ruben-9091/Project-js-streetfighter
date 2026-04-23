@@ -50,23 +50,31 @@ class Game {
     }
     
     move() {
-
-        //this.background.move();
         this.player1.move();
         this.player2.move();
 
         if (this.player1.collidesWith(this.player2)) {
-            this.player1.x = this.player1.prevX;
-            this.player1.y = this.player1.prevY;
-            this.player2.x = this.player2.prevX;
-            this.player2.y = this.player2.prevY; 
-        }
+            if (this.player1.x < this.player2.x) {
+                this.player1.x = this.player2.x - this.player1.w;
+                } else {
+                this.player1.x = this.player2.x + this.player2.w;
+                }
+                }
+        if (this.player2.collidesWith(this.player1)) {
+            if (this.player2.x < this.player1.x) {
+                this.player2.x = this.player1.x - this.player2.w;
+                } else {
+                this.player2.x = this.player1.x + this.player1.w;
+            }
+            }
 
         this.checkBounds();
+        }
 
-    }
 
-    checkBounds() { //esto es para que no se me salga de la pantalla
+   
+
+    checkBounds() { //para que no se me salga de la pantalla
         if (this.player1.x < 0) {
             this.player1.x = 0;
         }
@@ -100,10 +108,10 @@ class Game {
         this.ctx.fillStyle = "white"
 
         this.ctx.textAlign = 'left';
-        this.ctx.fillText(`PLAYER 1 ❤️: ${this.player1.health}`, 40, 50);
+        this.ctx.fillText(`PLAYER 1: ${this.player1.health}`, 40, 50);
 
         this.ctx.textAlign = 'right';
-        this.ctx.fillText(`PLAYER 2 ❤️: ${this.player2.health}`, this.canvas.width - 40, 50);
+        this.ctx.fillText(`PLAYER 2: ${this.player2.health}`, this.canvas.width - 40, 50);
 
     }
 

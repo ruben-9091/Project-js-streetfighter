@@ -54,6 +54,7 @@ class Player1 {
     groundTo(groundY) {
         this.y = groundY - this.h
         this.ground = groundY
+        this.floor = groundY - this.h;
     }
 
     onKeyEvent (event) {
@@ -97,9 +98,11 @@ class Player1 {
         this.y += this.vy;
 
         this.vy += GRAVITY;
-        if (this.y > this.floor) {
-            this.y = this.floor;
+         
+        if (this.y + this.h > this.ground) {
+            this.groundTo(this.ground);
             this.vy = 0;
+            this.gravity = 0;
             this.isJumping = false;
         }
 
@@ -118,6 +121,7 @@ class Player1 {
                 this.w,
                 this.h
             )
+
         }
         this.animate()
         this.drawCount ++
@@ -127,26 +131,37 @@ class Player1 {
     animate () {
 
         if (this.isJumping) {
+
             this.sprite.vFramesIndex = 0; 
             this.sprite.hFramesIndex = 1; 
             return;
-            } 
-         
 
-        
-        if (this.vx !== 0){
-            if (this.drawCount >= PLAYER1_FREQ) {
-            this.sprite.vFramesIndex = (this.sprite.vFramesIndex + 1) % this.sprite.vFrames
-            this.drawCount = 0; 
+            } else if (this.isAttack) {
+
+                this.sprite.vFramesIndex = 1;
+                this.sprite.hFramesIndex = 2; 
+            return;
+
+            } else if (this.vx !== 0) {
+
+                this.sprite.hFrameIndex = 0;
+            
+                if (this.drawCount >= PLAYER1_FREQ) {
+                    this.sprite.vFramesIndex = (this.sprite.vFramesIndex + 1) % this.sprite.vFrames
+                    this.drawCount = 0; 
             } 
             return; 
+
             }
 
         this.sprite.vFramesIndex = 0; 
         this.sprite.hFramesIndex = 0;
         }
         
-      
+
+
+
+
     
 
     collidesWith(element) {

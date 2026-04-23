@@ -1,4 +1,11 @@
 addEventListener('DOMContentLoaded', () => {
   const game = new Game('streetFighter');
-  game.start();
+
+  const btnStart = document.getElementById("startBtn")
+
+  btnStart.onclick = () => {
+    btnStart.style.display = "none"
+    game.start();
+  }
+  
 });

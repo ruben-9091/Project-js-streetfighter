@@ -16,7 +16,7 @@ class Player2 {
 
         this.health = PLAYER2_HEALTH; 
 
-        this.floor = CANVAS_H - this.h - 30;
+        this.floor = CANVAS_H - this.h;
 
         this.spriteLeft = new Image();
         this.spriteLeft.src = PLAYER2_LEFT_SPRITE; 
@@ -39,7 +39,7 @@ class Player2 {
         this.spriteRight.onload = () => {
             this.spriteRight.isReady = true; 
             this.spriteRight.frameW = Math.floor (this.spriteRight.width / this.spriteRight.vFrames);
-            this.spriteRight.frameH = Math.floor (this.sprite.height / this.sprite.hFrames)
+            this.spriteRight.frameH = Math.floor (this.spriteRight.height / this.sprite.hFrames)
         }
 
         this.sprite = this.spriteLeft; 
@@ -50,6 +50,7 @@ class Player2 {
     groundTo (groundY) {
         this.y = groundY - this.h
         this.ground = groundY
+        this.floor = groundY - this.h;
     }
 
 
@@ -59,7 +60,7 @@ class Player2 {
         switch (event.keyCode) {
             case KEY_A:
                 if (isPressed) {
-                    this.sprite = this.spriteLeft;
+                    if (!this.isJumping) this.sprite = this.spriteLeft;
                     this.vx = -player2VX;
                 } else {
                     this.vx = 0;
@@ -68,7 +69,7 @@ class Player2 {
 
             case KEY_D:
                 if (isPressed) {
-                    this.sprite = this.spriteRight;
+                    if (!this.isJumping) this.sprite = this.spriteRight;
                     this.vx = player2VX;
                 } else {
                     this.vx = 0;
@@ -76,11 +77,12 @@ class Player2 {
                 break;
 
             case KEY_W:
-                if (!this.isJumping) {
+                if (isPressed && !this.isJumping) {
                     this.isJumping = true;
                     this.vy = player2VY;
                 }
                 break;
+
             case KEY_Q: 
                 if (isPressed && !this.isAttack) {
                     this.isAttack = true; 
@@ -126,18 +128,19 @@ class Player2 {
     }
 
     animate () {
-        if (this.isAttack) {
-            this.sprite.vFramesIndex = 1;
-            this.sprite.hFramesIndex = 2; 
-            return; 
-        }
-
+        
         if (this.isJumping) {
             this.sprite.vFramesIndex = 1;
             this.sprite.hFramesIndex = 1; 
             return;
-        }
-        if (this.vx !== 0){
+
+        } else if (this.isAttack) {
+            this.sprite.vFramesIndex = 1;
+            this.sprite.hFramesIndex = 2; 
+            return; 
+            
+        } else if (this.vx !== 0){
+            this.sprite.hFrameIndex = 0;
             if (this.drawCount >= PLAYER2_FREQ) {
                 this.sprite.vFramesIndex = (this.sprite.vFramesIndex + 1) % this.sprite.vFrames
                 this.drawCount = 0;

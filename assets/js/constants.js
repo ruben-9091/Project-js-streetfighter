@@ -14,7 +14,7 @@ const FPS = 1000/60;
 const CANVAS_W = 1200;
 const CANVAS_H = 800;
 
-// esto es para las imagenes
+// alto y ancho de las imagenes
 const PLAYER1_H = 93
 const PLAYER1_W = 108;
 
@@ -27,8 +27,8 @@ const PLAYER2_W = 108;
 const player1VX = 5;
 const player2VX = 5;
 
-const player1VY = -15;
-const player2VY = -15;
+const player1VY = -20;
+const player2VY = -20;
 
 //frecuencia de animacion
 const PLAYER1_FREQ = 5;
@@ -50,9 +50,16 @@ const KEY_S = 83;
 const KEY_W = 87;
 const KEY_Q = 81; 
 
+//constantes para clase health
+const HEALTH = 30; 
+const HEALTH_W = 30;
+const HEALTH_H = 30; 
+const HEALTH_SRC = ""
 
- 
-const BG_FLOOR = 90;
+
+
+
+const BG_FLOOR = 70;
 
 // constantes de velocidades 
 const GRAVITY = 0.5

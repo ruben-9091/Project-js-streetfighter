@@ -1,14 +1,14 @@
 body {
   margin: 0;
-  background-image: url('/assets/images/backgrounds/background-gif.gif');
-  background-size: cover;
-  background-position: center;
+  
   
 }
-
+#startBtn {
+    background: none;
+    border: none
+}
 canvas {
-    border: 1px solid black;
-    
+   
 }
 
 .w-100 {
@@ -32,6 +32,6 @@ canvas {
 
 #logo {
   display: block;
-  margin: 2px auto 0;   /* centrado, con un poco de espacio arriba */
-  width: 500px;          /* ajusta el tamaño que quieras */
+  margin: 2px auto;   
+  width: 500px;        
 }
