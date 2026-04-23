@@ -15,7 +15,9 @@ class Player1 {
 
         this.floor = CANVAS_H - this.h - 30;;
 
-        this.gravity = 0.5;
+        this.health = PLAYER1_HEALTH;
+
+        this.gravity = 0;
         this.jumpStrength = -10;
 
         this.spriteRight = new Image();
@@ -79,6 +81,7 @@ class Player1 {
                 if (!this.isJumping) {
                     this.isJumping = true;
                     this.vy = player1VY;
+                    this.gravity = GRAVITY
                 }
                 break;
         }
@@ -87,6 +90,9 @@ class Player1 {
     
 
     move () {
+        this.prevX = this.x;
+        this.prevY = this.y;
+
         this.x += this.vx;
         this.y += this.vy;
 
@@ -144,6 +150,11 @@ class Player1 {
     
 
     collidesWith(element) {
-           
+        return (
+            (this.x < element.x + element.w) &&
+            (this.x + this.w > element.x) &&
+            (this.y < element.y + element.h) &&
+            (this.y + this.h > element.y)
+        )       
     }
     }

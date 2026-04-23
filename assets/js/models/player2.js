@@ -14,6 +14,8 @@ class Player2 {
         this.vx = 0;
         this.vy = 0;
 
+        this.health = PLAYER2_HEALTH; 
+
         this.floor = CANVAS_H - this.h - 30;
 
         this.spriteLeft = new Image();
@@ -79,10 +81,21 @@ class Player2 {
                     this.vy = player2VY;
                 }
                 break;
+            case KEY_Q: 
+                if (isPressed && !this.isAttack) {
+                    this.isAttack = true; 
+                } else {
+                    this.isAttack = false; 
+                }
+                break;
         }
     }
 
     move () {
+        this.prevX = this.x;
+        this.prevY = this.y;
+
+
         this.x += this.vx;
         this.y += this.vy;
 
@@ -113,6 +126,11 @@ class Player2 {
     }
 
     animate () {
+        if (this.isAttack) {
+            this.sprite.vFramesIndex = 1;
+            this.sprite.hFramesIndex = 2; 
+            return; 
+        }
 
         if (this.isJumping) {
             this.sprite.vFramesIndex = 1;
@@ -130,4 +148,12 @@ class Player2 {
         this.sprite.hFramesIndex = 0;
     }
 
+    collidesWith(element) {
+        return (
+            (this.x < element.x + element.w) &&
+            (this.x + this.w > element.x) &&
+            (this.y < element.y + element.h) &&
+            (this.y + this.h > element.y)
+        )       
+    }
     }

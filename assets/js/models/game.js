@@ -55,6 +55,13 @@ class Game {
         this.player1.move();
         this.player2.move();
 
+        if (this.player1.collidesWith(this.player2)) {
+            this.player1.x = this.player1.prevX;
+            this.player1.y = this.player1.prevY;
+            this.player2.x = this.player2.prevX;
+            this.player2.y = this.player2.prevY; 
+        }
+
         this.checkBounds();
 
     }
@@ -83,6 +90,22 @@ class Game {
         this.background.draw(); 
         this.player1.draw();
         this.player2.draw();
+
+        this.drawHealth();
     }
+
+
+    drawHealth () {
+        this.ctx.font = 'bold 24px Arial';
+        this.ctx.fillStyle = "white"
+
+        this.ctx.textAlign = 'left';
+        this.ctx.fillText(`PLAYER 1 ❤️: ${this.player1.health}`, 40, 50);
+
+        this.ctx.textAlign = 'right';
+        this.ctx.fillText(`PLAYER 2 ❤️: ${this.player2.health}`, this.canvas.width - 40, 50);
+
+    }
+
 
     }

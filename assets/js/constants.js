@@ -27,12 +27,16 @@ const PLAYER2_W = 108;
 const player1VX = 5;
 const player2VX = 5;
 
-const player1VY = -10;
-const player2VY = -10;
+const player1VY = -15;
+const player2VY = -15;
 
 //frecuencia de animacion
 const PLAYER1_FREQ = 5;
 const PLAYER2_FREQ = 5; 
+
+//vida jugadores
+const PLAYER1_HEALTH = 300;
+const PLAYER2_HEALTH = 300; 
 
 //constantes de teclas
 const KEY_LEFT = 37;
@@ -44,6 +48,8 @@ const KEY_A = 65;
 const KEY_D = 68;
 const KEY_S = 83;
 const KEY_W = 87;
+const KEY_Q = 81; 
+
 
  
 const BG_FLOOR = 90;
