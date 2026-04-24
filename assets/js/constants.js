@@ -15,11 +15,11 @@ const CANVAS_W = 1200;
 const CANVAS_H = 800;
 
 // alto y ancho de las imagenes
-const PLAYER1_H = 93
-const PLAYER1_W = 108;
+const PLAYER1_H = 94;
+const PLAYER1_W = 82;
 
-const PLAYER2_H = 93;
-const PLAYER2_W = 108;
+const PLAYER2_H = 94;
+const PLAYER2_W = 82;
 
 
 
