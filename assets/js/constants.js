@@ -52,11 +52,14 @@ const KEY_Q = 81;
 
 //constantes para clase health
 const HEALTH = 30; 
-const HEALTH_W = 30;
-const HEALTH_H = 30; 
-const HEALTH_SRC = ""
+const HEALTH_W = 289;
+const HEALTH_H = 287; 
+const HEALTH_SRC = "/assets/images/Sprites/health/hearth-icon.png"
+const HEALTH_ANIMATION_FREQ = 5; 
 
 
+
+const MAX_INGAME_HEALTHICON = 1; 
 
 
 const BG_FLOOR = 70;
@@ -64,3 +67,6 @@ const BG_FLOOR = 70;
 // constantes de velocidades 
 const GRAVITY = 0.5
 const JUMP_STRENGTH = -10
+
+//para limitar la aparicion de el icono de health
+

@@ -4,7 +4,6 @@ class Game {
         this.canvas = document.getElementById(canvasId);
         this.ctx = this.canvas.getContext('2d');
 
-
         this.canvas.width = CANVAS_W;
         this.canvas.height = CANVAS_H;
 
@@ -17,6 +16,11 @@ class Game {
 
 
         this.background = new Background(this.ctx)
+
+        
+
+        this.healthIcon = []; 
+        this.healthTimeoutId = undefined; 
 
         this.drawIntervalID = undefined;
         this.fps = FPS;
@@ -39,7 +43,9 @@ class Game {
             this.drawIntervalID = setInterval(() => {
                 this.clear(); 
                 this.move();
+                this.checkCollisions(); 
                 this.draw();
+                this.generateElements(); 
         }, this.fps);
         }
     }
@@ -90,6 +96,17 @@ class Game {
 
     }
 
+    checkCollisions () {
+        this.healthIcon = this.healthIcon.filter((health) => {
+            if (this.player1.collidesWith(health)){
+                this.player1.health += health.health
+                return false; 
+            } else {
+                return true;
+            }
+        }); 
+    }
+
     clear () {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
@@ -98,8 +115,24 @@ class Game {
         this.background.draw(); 
         this.player1.draw();
         this.player2.draw();
+        this.healthIcon.forEach(health => health.draw()); 
 
         this.drawHealth();
+    }
+
+
+    generateElements () {
+        if (!this.healthTimeoutId && this.healthIcon.length < MAX_INGAME_HEALTHICON) {
+             
+            this.healthTimeoutId = setTimeout(() => {
+                const HEALTH_MINY = 150;
+                const HEALTH_MAXY = CANVAS_H - BG_FLOOR - PLAYER1_H  - 50;
+                this.healthIcon.push(new Health (this.ctx, Math.random()*(this.canvas.width - HEALTH_W), HEALTH_MINY + Math.random() * (HEALTH_MAXY - HEALTH_MINY)))
+                this.healthTimeoutId = undefined;
+                
+            }, Math.floor(Math.random() *10) * 1000);
+             
+        }
     }
 
 
