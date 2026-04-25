@@ -85,6 +85,15 @@ class Player1 {
                     this.gravity = GRAVITY
                 }
                 break;
+
+        
+            case KEY_0: 
+                if (isPressed && !this.isAttack) { 
+                    this.isAttack = true; 
+                } else {
+                    this.isAttack = false; 
+                }
+                break;
         }
         }
         
@@ -104,6 +113,7 @@ class Player1 {
             this.vy = 0;
             this.gravity = 0;
             this.isJumping = false;
+            
         }
 
     }
@@ -156,6 +166,14 @@ class Player1 {
 
         this.sprite.vFramesIndex = 0; 
         this.sprite.hFramesIndex = 0;
+        }
+
+        shootKame () {
+            if (this.sprite === this.spriteRight) {
+                return new Kame(this.ctx, (this.x + this.w), this.y + this.h/3.5, KAME_VX)
+            } else if (this.sprite === this.spriteLeft) {
+                return new Kame(this.ctx, this.x-20, this.y + this.h/3.5, -KAME_VX)
+            }
         }
         
 

@@ -22,6 +22,9 @@ class Game {
         this.healthIcon = []; 
         this.healthTimeoutId = undefined; 
 
+        this.kames = []; 
+        
+
         this.drawIntervalID = undefined;
         this.fps = FPS;
 
@@ -29,7 +32,19 @@ class Game {
     }
 
     setupListeners() {
-    addEventListener('keydown', (event) => this.player1.onKeyEvent(event))
+    addEventListener('keydown', (event) => {
+
+        this.player1.onKeyEvent(event)
+
+        if (event.keyCode === KEY_0) {
+            const kame = this.player1.shootKame();
+            if (kame) {
+                this.kames.push(kame)
+            }
+        }
+    })
+    
+        
     addEventListener('keyup', (event) => this.player1.onKeyEvent(event))
 
     addEventListener('keydown', (event) => this.player2.onKeyEvent(event))
@@ -73,9 +88,12 @@ class Game {
                 this.player2.x = this.player1.x + this.player1.w;
             }
             }
-
+        this.kames.forEach(kame => kame.move())
+        
         this.checkBounds();
         }
+
+        
 
 
    
@@ -115,7 +133,9 @@ class Game {
         this.background.draw(); 
         this.player1.draw();
         this.player2.draw();
+        this.kames.forEach(kame => kame.draw());
         this.healthIcon.forEach(health => health.draw()); 
+        
 
         this.drawHealth();
     }

@@ -106,6 +106,7 @@ class Player2 {
             this.y = this.floor;
             this.vy = 0;
             this.isJumping = false;
+            this.isAttack = false;
         }
     }
 

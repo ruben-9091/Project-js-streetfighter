@@ -43,6 +43,8 @@ const KEY_LEFT = 37;
 const KEY_UP = 38;
 const KEY_RIGHT = 39;
 const KEY_DOWN = 40; 
+const KEY_0 = 96; 
+
 
 const KEY_A = 65;
 const KEY_D = 68;
@@ -56,6 +58,14 @@ const HEALTH_W = 289;
 const HEALTH_H = 287; 
 const HEALTH_SRC = "/assets/images/Sprites/health/hearth-icon.png"
 const HEALTH_ANIMATION_FREQ = 5; 
+
+//constantes para clase kame
+const KAME = 80; 
+const KAME_W = 66;
+const KAME_H = 38; 
+const KAME_SRC = "/assets/images/Sprites/kame-icon/kame-icon.png"
+const KAME_ANIMATION_FREQ = 5;
+const KAME_VX = 5;  
 
 
 

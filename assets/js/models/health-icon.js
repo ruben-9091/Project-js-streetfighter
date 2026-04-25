@@ -1,16 +1,16 @@
 class Health {
 
-    constructor (ctx, x, y, w = HEALTH_W, h = HEALTH_H, health = HEALTH, src = HEALTH_SRC) {
+    constructor (ctx, x, y, w = HEALTH_W, h = HEALTH_H, damage = HEALTH, src = HEALTH_SRC) {
         this.ctx = ctx
 
         this.x = x;
         this.y = y;
-        this.w = w /3.5; 
-        this.h = h/3.5; 
+        this.w = w / 3.5; 
+        this.h = h / 3.5; 
 
 
 
-        this.health = health; 
+        this.health = damage; 
 
         this.sprite = new Image ();
         
