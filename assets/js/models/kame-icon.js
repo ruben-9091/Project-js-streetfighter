@@ -1,6 +1,6 @@
 class Kame {
 
-    constructor (ctx, x, y, vx, w = KAME_W, h = KAME_H, damage = KAME, src = KAME_SRC) {
+    constructor (ctx, x, y, vx, w = KAME_W, h = KAME_H, damage = KAME,) {
 
 
         this.ctx = ctx;
@@ -14,19 +14,38 @@ class Kame {
 
         this.damage = damage; 
 
-        this.sprite = new Image(); 
+        this.spriteRigth = new Image(); 
 
-        this.sprite.vFrames = 6;
-        this.sprite.hFrames = 1;
-        this.sprite.vFrameIndex = 0;
-        this.sprite.hFrameIndex = 0;
+        this.spriteRigth.vFrames = 6;
+        this.spriteRigth.hFrames = 1;
+        this.spriteRigth.vFrameIndex = 0;
+        this.spriteRigth.hFrameIndex = 0;
 
-        this.sprite.onload = () => {
-            this.sprite.isReady = true; 
-            this.sprite.frameW = Math.floor (this.sprite.width/this.sprite.vFrames);
-            this.sprite.frameH = Math.floor (this.sprite.height/this.sprite.hFrames); 
+        this.spriteRigth.onload = () => {
+            this.spriteRigth.isReady = true; 
+            this.spriteRigth.frameW = Math.floor (this.spriteRigth.width/this.spriteRigth.vFrames);
+            this.spriteRigth.frameH = Math.floor (this.spriteRigth.height/this.spriteRigth.hFrames); 
         }
-        this.sprite.src = src; 
+
+        this.spriteRigth.src = "/assets/images/Sprites/kame-icon/kame-icon-right.png";
+
+        this.spriteLeft = new Image();
+        
+        this.spriteLeft.vFrames = 6;
+        this.spriteLeft.hFrames = 1;
+        this.spriteLeft.vFrameIndex = 0;
+        this.spriteLeft.hFrameIndex = 0;
+
+        this.spriteLeft.onload = () => {
+            this.spriteLeft.isReady = true; 
+            this.spriteLeft.frameW = Math.floor (this.spriteLeft.width/this.spriteLeft.vFrames);
+            this.spriteLeft.frameH = Math.floor (this.spriteLeft.height/this.spriteLeft.hFrames);
+            }
+
+        this.spriteLeft.src = "/assets/images/Sprites/kame-icon/kame-icon-left.png"; 
+
+        this.sprite = vx > 0 ? this.spriteRigth : this.spriteLeft;
+
         this.drawCount = 0; 
     }
 
@@ -45,6 +64,7 @@ class Kame {
                 this.w,
                 this.h
             )
+
             this.animate ();
             this.drawCount++
 

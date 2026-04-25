@@ -47,7 +47,17 @@ class Game {
         
     addEventListener('keyup', (event) => this.player1.onKeyEvent(event))
 
-    addEventListener('keydown', (event) => this.player2.onKeyEvent(event))
+   addEventListener('keydown', (event) => {
+
+        this.player2.onKeyEvent(event)
+
+        if (event.keyCode === KEY_Q) {
+            const kame = this.player2.shootKame();
+            if (kame) {
+                this.kames.push(kame)
+            }
+        }
+    })
     addEventListener('keyup', (event) => this.player2.onKeyEvent(event))
     }
 

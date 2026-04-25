@@ -38,8 +38,8 @@ class Player2 {
         this.spriteRight.hFramesIndex = 0;
         this.spriteRight.onload = () => {
             this.spriteRight.isReady = true; 
-            this.spriteRight.frameW = Math.floor (this.spriteRight.width / this.spriteRight.vFrames);
-            this.spriteRight.frameH = Math.floor (this.spriteRight.height / this.sprite.hFrames)
+            this.spriteRight.frameW = Math.floor(this.spriteRight.width / this.spriteRight.vFrames);
+            this.spriteRight.frameH = Math.floor(this.spriteRight.height / this.spriteRight.hFrames); // ← CORREGIDO
         }
 
         this.sprite = this.spriteLeft; 
@@ -106,7 +106,7 @@ class Player2 {
             this.y = this.floor;
             this.vy = 0;
             this.isJumping = false;
-            this.isAttack = false;
+    
         }
     }
 
@@ -150,7 +150,16 @@ class Player2 {
         }
         this.sprite.vFramesIndex = 0; 
         this.sprite.hFramesIndex = 0;
+        console.log('ATTACK?', this.isAttack, 'vx:', this.vx);
     }
+
+    shootKame () {
+            if (this.sprite === this.spriteRight) {
+                return new Kame(this.ctx, (this.x + this.w), this.y + this.h/3.5, KAME_VX)
+            } else if (this.sprite === this.spriteLeft) {
+                return new Kame(this.ctx, this.x-20, this.y + this.h/3.5, -KAME_VX)
+            }
+        }
 
     collidesWith(element) {
         return (

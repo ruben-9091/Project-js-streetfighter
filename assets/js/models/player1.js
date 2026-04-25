@@ -142,7 +142,7 @@ class Player1 {
 
         if (this.isJumping) {
 
-            this.sprite.vFramesIndex = 0; 
+            this.sprite.vFramesIndex = 1; 
             this.sprite.hFramesIndex = 1; 
             return;
 
