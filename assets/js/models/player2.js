@@ -2,6 +2,7 @@ class Player2 {
 
 
     constructor (ctx, x, y,) {
+
         this.ctx = ctx;
         this.x = x;
         this.y = y;
@@ -141,7 +142,9 @@ class Player2 {
             return; 
             
         } else if (this.vx !== 0){
-            this.sprite.hFrameIndex = 0;
+
+            this.sprite.hFramesIndex = 0;
+            
             if (this.drawCount >= PLAYER2_FREQ) {
                 this.sprite.vFramesIndex = (this.sprite.vFramesIndex + 1) % this.sprite.vFrames
                 this.drawCount = 0;

@@ -144,28 +144,31 @@ class Player1 {
 
             this.sprite.vFramesIndex = 1; 
             this.sprite.hFramesIndex = 1; 
-            return;
+            
 
             } else if (this.isAttack) {
 
                 this.sprite.vFramesIndex = 1;
                 this.sprite.hFramesIndex = 2; 
-            return;
+        
 
             } else if (this.vx !== 0) {
 
-                this.sprite.hFrameIndex = 0;
+                this.sprite.hFramesIndex = 0;
             
                 if (this.drawCount >= PLAYER1_FREQ) {
                     this.sprite.vFramesIndex = (this.sprite.vFramesIndex + 1) % this.sprite.vFrames
                     this.drawCount = 0; 
-            } 
-            return; 
-
+                } 
+            } else {
+                this.sprite.vFramesIndex = 0; 
+                this.sprite.hFramesIndex = 0;
             }
+             
 
-        this.sprite.vFramesIndex = 0; 
-        this.sprite.hFramesIndex = 0;
+            
+
+        
         }
 
         shootKame () {
