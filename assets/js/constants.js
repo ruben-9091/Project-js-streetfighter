@@ -7,9 +7,15 @@ const PLAYER2_LEFT_SPRITE = "/assets/images/Sprites/Main-character/ken-left-char
 const PLAYER2_RIGHT_SPRITE = "/assets/images/Sprites/Main-character/ken-right-character.png"
 const BACKGROUND_GAMEOVER = "/assets/images/backgrounds/game-over/game-over-2.png"
 const ENEMIES_SPRITES = [
-    
-
+    "/assets/images/Sprites/enemies/Teletubbies/dipsy.png",
+    "/assets/images/Sprites/enemies/Teletubbies/laa_laa.png",
+    "/assets/images/Sprites/enemies/Teletubbies/po.png",
+    "/assets/images/Sprites/enemies/Teletubbies/tinky_kinky.png"
 ];
+const ENEMY_W = 246;
+const ENEMY_H = 330; 
+const ENEMY_VX = 2; 
+const ENEMY_ANIMATE_FREQ = 5; 
 
 
 const FPS = 1000/60;
