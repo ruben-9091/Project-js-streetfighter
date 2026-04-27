@@ -17,7 +17,11 @@ class Game {
 
         this.background = new Background(this.ctx)
 
-        
+        this.backgroundGameOver = new Image();
+        this.backgroundGameOver.src = BACKGROUND_GAMEOVER;
+        this.backgroundGameOver.onload = () => {
+            this.backgroundGameOver.isReady = true; 
+        }
 
         this.healthIcon = []; 
         this.healthTimeoutId = undefined; 
@@ -71,6 +75,7 @@ class Game {
                 this.checkCollisions(); 
                 this.draw();
                 this.generateElements(); 
+                this.checkGameOver(); 
         }, this.fps);
         }
     }
@@ -78,6 +83,7 @@ class Game {
     stop () {
         clearInterval(this.drawIntervalID);
         this.drawIntervalID = undefined;
+
     }
     
     move() {
@@ -103,11 +109,6 @@ class Game {
         this.checkBounds();
         }
 
-        
-
-
-   
-
     checkBounds() { //para que no se me salga de la pantalla
         if (this.player1.x < 0) {
             this.player1.x = 0;
@@ -129,10 +130,27 @@ class Game {
             if (this.player1.collidesWith(health)){
                 this.player1.health += health.health
                 return false; 
+            } else if (this.player2.collidesWith(health)) {
+                this.player2.health += health.health
+                return false
             } else {
                 return true;
             }
-        }); 
+        })
+
+        this.kames = this.kames.filter ((kame) => {
+            if (this.player1.collidesWith(kame)) {
+                this.player1.takeDamage (kame.damage)
+                return false;
+            } else if (this.player2.collidesWith(kame)){
+                this.player2.takeDamage (kame.damage)
+                return false; 
+            } else {
+                return true; 
+            }
+        })
+
+
     }
 
     clear () {
@@ -148,6 +166,7 @@ class Game {
         
 
         this.drawHealth();
+        
     }
 
 
@@ -165,6 +184,14 @@ class Game {
         }
     }
 
+    checkGameOver () {
+        if (this.player1.health <= 0 || this.player2.health <= 0) {
+            this.stop();
+            
+            this.drawGameOver(); 
+            document.getElementById("restartBtn").style.display = "block";
+        }
+    }
 
     drawHealth () {
         this.ctx.font = 'bold 24px Arial';
@@ -176,6 +203,50 @@ class Game {
         this.ctx.textAlign = 'right';
         this.ctx.fillText(`PLAYER 2: ${this.player2.health}`, this.canvas.width - 40, 50);
 
+    }
+
+    drawGameOver () {
+
+         if (this.backgroundGameOver.isReady) {
+                this.ctx.drawImage (
+                    this.backgroundGameOver,
+                    0,
+                    0,
+                    this.canvas.width,
+                    this.canvas.height
+                )
+            }
+
+        let winner;
+
+        if (this.player2.health <= 0) {
+            winner = "PLAYER 1 WINS!"
+            this.ctx.fillStyle = 'blue';
+            
+        } else if (this.player1.health <= 0) {
+            winner = "PLAYER 2 WINS!"
+            this.ctx.fillStyle = 'red';
+            
+        }
+       
+        this.ctx.font = 'bold 40px Arial';
+        this.ctx.fillText(winner, this.canvas.width / 2 + 150, this.canvas.height / 2 + 200);
+
+       
+
+
+
+    }
+
+    reset () {
+        this.player1.health = PLAYER1_HEALTH;
+        this.player2.health = PLAYER2_HEALTH;
+        this.player1.x = 50;
+        this.player1.y = 700;
+        this.healthIcon = [];
+        this.kames = [];
+        document.getElementById ("restartBtn").style.display = "none"
+        this.start(); 
     }
 
 

@@ -5,7 +5,11 @@ const PLAYER1_RIGHT_SPRITE = "/assets/images/Sprites/Main-character/ryu-right-ch
 const PLAYER1_LEFT_SPRITE = "/assets/images/Sprites/Main-character/ryu-left-character.png"
 const PLAYER2_LEFT_SPRITE = "/assets/images/Sprites/Main-character/ken-left-character.png"
 const PLAYER2_RIGHT_SPRITE = "/assets/images/Sprites/Main-character/ken-right-character.png"
+const BACKGROUND_GAMEOVER = "/assets/images/backgrounds/game-over/game-over-2.png"
+const ENEMIES_SPRITES = [
+    
 
+];
 
 
 const FPS = 1000/60;

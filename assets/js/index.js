@@ -8,4 +8,11 @@ addEventListener('DOMContentLoaded', () => {
     game.start();
   }
   
+  const btnReset = document.getElementById("restartBtn")
+
+  btnReset.onclick = () => {
+    btnStart.style.display = "block"
+    game.reset();
+  }
+  
 });

@@ -1,11 +1,17 @@
 body {
   margin: 0;
-  
-  
+  background: url("/assets/images/backgrounds/street-fighter-3.png");
+  background-size: cover;
 }
+
+#gameContainer {
+    position: relative; 
+}
+
 #startBtn {
     background: none;
-    border: none
+    border: none;
+    cursor: pointer; 
 }
 canvas {
    
@@ -30,8 +36,23 @@ canvas {
     align-items: center;
 }
 
+#restartBtn {
+    display: none; 
+    position: absolute; 
+    width: 300;
+    height: 300;
+
+
+    font-size: 75px;
+    color: #ea8e1f;
+    background: none; 
+    cursor: pointer;
+}
+
 #logo {
   display: block;
   margin: 2px auto;   
   width: 500px;        
 }
+
+

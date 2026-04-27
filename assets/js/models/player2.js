@@ -45,6 +45,8 @@ class Player2 {
 
         this.sprite = this.spriteLeft; 
         this.drawCount = 0; 
+
+        this.isDamaged = false; 
         
     }
 
@@ -52,9 +54,8 @@ class Player2 {
         this.y = groundY - this.h
         this.ground = groundY
         this.floor = groundY - this.h;
+    
     }
-
-
     
     onKeyEvent (event) {
         const isPressed = event.type === 'keydown';
@@ -158,11 +159,26 @@ class Player2 {
 
     shootKame () {
             if (this.sprite === this.spriteRight) {
-                return new Kame(this.ctx, (this.x + this.w), this.y + this.h/3.5, KAME_VX)
+                return new Kame(this.ctx, this.x + this.w, this.y + this.h/3.5, KAME_VX)
             } else if (this.sprite === this.spriteLeft) {
-                return new Kame(this.ctx, this.x-20, this.y + this.h/3.5, -KAME_VX)
+                return new Kame(this.ctx, this.x -this.w +50, this.y + this.h/3.5, -KAME_VX)
             }
+    }
+
+    takeDamage (amount) {
+        if (this.isDamaged) {
+            return; 
         }
+
+        this.health -= amount;
+        this.isDamaged = true; 
+        
+        setTimeout(() => {
+            this.isDamaged = false;
+        }, 1000)
+
+
+    }
 
     collidesWith(element) {
         return (
@@ -172,4 +188,5 @@ class Player2 {
             (this.y + this.h > element.y)
         )       
     }
+
     }
