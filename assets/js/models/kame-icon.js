@@ -47,6 +47,7 @@ class Kame {
         this.sprite = vx > 0 ? this.spriteRigth : this.spriteLeft;
 
         this.drawCount = 0; 
+        this.isOutOfBounds = false;
     }
 
 
@@ -80,6 +81,9 @@ class Kame {
 
     move () {
         this.x += this.vx
+        if (this.x > CANVAS_W || this.x < 0) {
+            this.isOutOfBounds = true; 
+        }
     }
 
 

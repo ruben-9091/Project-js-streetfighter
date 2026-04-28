@@ -7,7 +7,7 @@ class Game {
         this.canvas.width = CANVAS_W;
         this.canvas.height = CANVAS_H;
 
-        this.player1 = new Player1(this.ctx, 50, 280);
+        this.player1 = Player1.buildRyu(this.ctx, 50, 280, 'P1');
         this.player1.groundTo(this.canvas.height - BG_FLOOR)
 
 
@@ -27,6 +27,9 @@ class Game {
         this.healthTimeoutId = undefined; 
 
         this.kames = []; 
+
+        this.enemies = [];
+        this.enemiesTimeoutId = undefined; 
         
 
         this.drawIntervalID = undefined;
@@ -105,7 +108,11 @@ class Game {
             }
             }
         this.kames.forEach(kame => kame.move())
-        
+        this.enemies.forEach(enemy => enemy.move())
+
+        this.kames.filter (kame => !kame.isOutOfBounds); 
+        this.enemies.filter (enemy => !enemy.isOutOfBounds);
+
         this.checkBounds();
         }
 
@@ -122,6 +129,9 @@ class Game {
         }
         if (this.player2.x + this.player2.w > this.canvas.width)
             this.player2.x = this.canvas.width - this.player2.w;
+
+
+
 
     }
 
@@ -150,6 +160,18 @@ class Game {
             }
         })
 
+        this.enemies = this.enemies.filter ((enemy) => {
+            if (this.player1.collidesWith(enemy)) {
+                this.player1.health -= enemy.health
+                return false; 
+            } else if (this.player2.collidesWith(enemy)) {
+                this.player2.health -= enemy.health
+                return false; 
+            } else {
+                return true; 
+            }
+        })
+
 
     }
 
@@ -163,12 +185,12 @@ class Game {
         this.player2.draw();
         this.kames.forEach(kame => kame.draw());
         this.healthIcon.forEach(health => health.draw()); 
+        this.enemies.forEach(enemy => enemy.draw())
         
 
         this.drawHealth();
         
     }
-
 
     generateElements () {
         if (!this.healthTimeoutId && this.healthIcon.length < MAX_INGAME_HEALTHICON) {
@@ -182,6 +204,18 @@ class Game {
             }, Math.floor(Math.random() *10) * 1000);
              
         }
+
+            if (!this.enemiesTimeoutId && this.enemies.length < MAX_INGAME_ENEMIES) {
+
+            this.enemiesTimeoutId = setTimeout (() => {
+                const randomSprite = ENEMIES_SPRITES [Math.floor (Math.random() * ENEMIES_SPRITES.length)];
+                this.enemies.push(new Enemies (this.ctx, 0, this.canvas.height - BG_FLOOR - (ENEMY_H/2), randomSprite))
+                this.enemiesTimeoutId = undefined; 
+            }, Math.floor(Math.random()*10)* 1000); 
+        }
+
+
+
     }
 
     checkGameOver () {

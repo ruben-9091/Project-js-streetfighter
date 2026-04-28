@@ -1,31 +1,39 @@
 class Player1 {
 
+    static buildRyu(ctx, x, y, mode) {
+        const movements = (mode === 'P1') ? PLAYER_RIGHT_MOVEMENTS : PLAYER_LEFT_MOVEMENTS
+        const sprites = (mode === 'P1') ? {...CHARACTERS.ryu.sprites, direction: 'right'} : {...CHARACTERS.ryu.sprites, direction: 'left'}
+        return new Player1 (ctx, x, y, movements, sprites, CHARACTERS.ryu)
+    }
 
-    constructor (ctx, x, y,) {
+    constructor(ctx, x, y, movements, sprites, character) {
+
         this.ctx = ctx;
         this.x = x;
         this.y = y;
+        this.movements = movements;
 
-        this.w = PLAYER1_W * 2.5;
-        this.h = PLAYER1_H * 2.5;
-      
+        this.w = character.w * 2.5;
+        this.h = character.h * 2.5;
+        this.health = character.health;
+
 
         this.vx = 0;
         this.vy = 0;
 
         this.floor = CANVAS_H - this.h - 30;;
 
-        this.health = PLAYER1_HEALTH;
+        
 
         this.gravity = 0;
         this.jumpStrength = -10;
 
         this.spriteRight = new Image();
-        this.spriteRight.src = PLAYER1_RIGHT_SPRITE;
-        this.spriteRight.vFrames = 3; 
-        this.spriteRight.hFrames = 3; 
+        this.spriteRight.src = sprites.right;
+        this.spriteRight.vFrames = 3;
+        this.spriteRight.hFrames = 3;
         this.spriteRight.vFramesIndex = 0;
-        this.spriteRight.hFramesIndex = 0; 
+        this.spriteRight.hFramesIndex = 0;
         this.spriteRight.onload = () => {
             this.spriteRight.isReady = true;
             this.spriteRight.frameW = Math.floor(this.spriteRight.width / this.spriteRight.vFrames)
@@ -33,11 +41,11 @@ class Player1 {
         }
 
         this.spriteLeft = new Image();
-        this.spriteLeft.src = PLAYER1_LEFT_SPRITE;
-        this.spriteLeft.vFrames = 3; 
-        this.spriteLeft.hFrames = 3; 
+        this.spriteLeft.src = sprites.left;
+        this.spriteLeft.vFrames = 3;
+        this.spriteLeft.hFrames = 3;
         this.spriteLeft.vFramesIndex = 0;
-        this.spriteLeft.hFramesIndex = 0; 
+        this.spriteLeft.hFramesIndex = 0;
         this.spriteLeft.onload = () => {
             this.spriteLeft.isReady = true;
             this.spriteLeft.frameW = Math.floor(this.spriteLeft.width / this.spriteLeft.vFrames)
@@ -45,25 +53,25 @@ class Player1 {
         }
 
 
-        this.sprite = this.spriteRight;
-        this.drawCount = 0; 
+        this.sprite = (sprites.direction === 'right') ? this.spriteRight : this.spriteLeft;
+        this.drawCount = 0;
 
-        this.isDamaged = false; 
-   
+        this.isDamaged = false;
 
 
-        }
-    
+
+    }
+
     groundTo(groundY) {
         this.y = groundY - this.h
         this.ground = groundY
         this.floor = groundY - this.h;
     }
 
-    onKeyEvent (event) {
+    onKeyEvent(event) {
         const isPressed = event.type === 'keydown';
         switch (event.keyCode) {
-            case KEY_LEFT:
+            case this.movements.left:
                 if (isPressed) {
                     this.sprite = this.spriteLeft;
                     this.vx = -player1VX;
@@ -72,7 +80,7 @@ class Player1 {
                 }
                 break;
 
-            case KEY_RIGHT:
+            case this.movements.right:
                 if (isPressed) {
                     this.sprite = this.spriteRight;
                     this.vx = player1VX;
@@ -80,8 +88,8 @@ class Player1 {
                     this.vx = 0;
                 }
                 break;
-            
-            case KEY_UP:
+
+            case this.movements.up:
                 if (!this.isJumping) {
                     this.isJumping = true;
                     this.vy = player1VY;
@@ -89,18 +97,15 @@ class Player1 {
                 }
                 break;
 
-        
-            case KEY_0: 
-                if (isPressed && !this.isAttack) { 
-                    this.isAttack = true; 
-                } else {
-                    this.isAttack = false; 
-                }
+
+            case this.movements.attack:
+                this.isAttack = isPressed && !this.isAttack;
+
                 break;
         }
     }
-        
-    move () {
+
+    move() {
         this.prevX = this.x;
         this.prevY = this.y;
 
@@ -108,21 +113,21 @@ class Player1 {
         this.y += this.vy;
 
         this.vy += GRAVITY;
-         
+
         if (this.y + this.h > this.ground) {
             this.groundTo(this.ground);
             this.vy = 0;
             this.gravity = 0;
             this.isJumping = false;
-            
+
         }
 
     }
 
-    draw () {
+    draw() {
         if (this.sprite.isReady) {
-            this.ctx.drawImage (
-                this.sprite, 
+            this.ctx.drawImage(
+                this.sprite,
                 this.sprite.vFramesIndex * this.sprite.frameW,
                 this.sprite.hFramesIndex * this.sprite.frameH,
                 this.sprite.frameW,
@@ -135,56 +140,54 @@ class Player1 {
 
         }
         this.animate()
-        this.drawCount ++
-    
+        this.drawCount++
+
     }
 
-    animate () {
+    animate() {
 
         if (this.isJumping) {
 
-            this.sprite.vFramesIndex = 1; 
-            this.sprite.hFramesIndex = 1; 
-            
+            this.sprite.vFramesIndex = 1;
+            this.sprite.hFramesIndex = 1;
 
-            } else if (this.isAttack) {
 
-                this.sprite.vFramesIndex = 1;
-                this.sprite.hFramesIndex = 2; 
-        
+        } else if (this.isAttack) {
 
-            } else if (this.vx !== 0) {
+            this.sprite.vFramesIndex = 1;
+            this.sprite.hFramesIndex = 2;
 
-                this.sprite.hFramesIndex = 0;
-            
-                if (this.drawCount >= PLAYER1_FREQ) {
-                    this.sprite.vFramesIndex = (this.sprite.vFramesIndex + 1) % this.sprite.vFrames
-                    this.drawCount = 0; 
-                } 
-            } else {
-                this.sprite.vFramesIndex = 0; 
-                this.sprite.hFramesIndex = 0;
+
+        } else if (this.vx !== 0) {
+
+            this.sprite.hFramesIndex = 0;
+
+            if (this.drawCount >= PLAYER1_FREQ) {
+                this.sprite.vFramesIndex = (this.sprite.vFramesIndex + 1) % this.sprite.vFrames
+                this.drawCount = 0;
             }
-             
-        
-    }
-
-    shootKame () {
-        if (this.sprite === this.spriteRight) {
-                return new Kame(this.ctx, (this.x + this.w + 20), this.y + this.h/3.5, KAME_VX)
-        } else if (this.sprite === this.spriteLeft) {
-                return new Kame(this.ctx, this.x - this.w +50, this.y + this.h/3.5, -KAME_VX)
+        } else {
+            this.sprite.vFramesIndex = 0;
+            this.sprite.hFramesIndex = 0;
         }
     }
 
-   
-    takeDamage (amount) {
+    shootKame() {
+        if (this.sprite === this.spriteRight) {
+            return new Kame(this.ctx, (this.x + this.w + 20), this.y + this.h / 3.5, KAME_VX)
+        } else if (this.sprite === this.spriteLeft) {
+            return new Kame(this.ctx, this.x - this.w + 50, this.y + this.h / 3.5, -KAME_VX)
+        }
+    }
+
+
+    takeDamage(amount) {
         if (this.isDamaged) {
-            return; 
+            return;
         }
 
         this.health -= amount;
-        this.isDamaged = true; 
+        this.isDamaged = true;
 
         setTimeout(() => {
             this.isDamaged = false;
@@ -192,7 +195,7 @@ class Player1 {
 
 
     }
-        
+
 
     collidesWith(element) {
         return (
@@ -200,7 +203,7 @@ class Player1 {
             (this.x + this.w > element.x) &&
             (this.y < element.y + element.h) &&
             (this.y + this.h > element.y)
-        )       
+        )
     }
 
-    }
+}

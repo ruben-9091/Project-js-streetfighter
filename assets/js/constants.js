@@ -1,21 +1,39 @@
 
 // constantes de archivos
 const BACKGR_MAIN = "/assets/images/backgrounds/congreso de los diputados.png"
-const PLAYER1_RIGHT_SPRITE = "/assets/images/Sprites/Main-character/ryu-right-character.png"
-const PLAYER1_LEFT_SPRITE = "/assets/images/Sprites/Main-character/ryu-left-character.png"
-const PLAYER2_LEFT_SPRITE = "/assets/images/Sprites/Main-character/ken-left-character.png"
-const PLAYER2_RIGHT_SPRITE = "/assets/images/Sprites/Main-character/ken-right-character.png"
 const BACKGROUND_GAMEOVER = "/assets/images/backgrounds/game-over/game-over-2.png"
+
 const ENEMIES_SPRITES = [
-    "/assets/images/Sprites/enemies/Teletubbies/dipsy.png",
-    "/assets/images/Sprites/enemies/Teletubbies/laa_laa.png",
+    "/assets/images/Sprites/enemies/Teletubbies/batman.png",
+    "/assets/images/Sprites/enemies/Teletubbies/thanos.png",
     "/assets/images/Sprites/enemies/Teletubbies/po.png",
-    "/assets/images/Sprites/enemies/Teletubbies/tinky_kinky.png"
+    "/assets/images/Sprites/enemies/Teletubbies/vader.png",
+    "/assets/images/Sprites/enemies/Teletubbies/mewtwo.png"
 ];
+
+const PLAYER_RIGHT_MOVEMENTS = {
+    left: 37, 
+    up: 38,
+    right: 39,
+    down: 40, 
+    attack: 96 
+}
+const PLAYER_LEFT_MOVEMENTS = {
+    left: 65,
+    up: 87,
+    right: 68,
+    down: 83,
+    attack: 81, 
+}
+
+
+
+
 const ENEMY_W = 246;
 const ENEMY_H = 330; 
 const ENEMY_VX = 2; 
 const ENEMY_ANIMATE_FREQ = 5; 
+const ENEMY_HEALTH = 50; 
 
 
 const FPS = 1000/60;
@@ -25,11 +43,11 @@ const CANVAS_W = 1200;
 const CANVAS_H = 800;
 
 // alto y ancho de las imagenes
-const PLAYER1_H = 94;
-const PLAYER1_W = 82;
+const RYU_H = 94;
+const RYU_W = 82;
 
-const PLAYER2_H = 94;
-const PLAYER2_W = 82;
+const KEN_H = 94;
+const KEN_W = 82;
 
 
 
@@ -80,6 +98,7 @@ const KAME_VX = 5;
 
 
 const MAX_INGAME_HEALTHICON = 1; 
+const MAX_INGAME_ENEMIES = 1; 
 
 
 const BG_FLOOR = 70;
@@ -90,3 +109,25 @@ const JUMP_STRENGTH = -10
 
 //para limitar la aparicion de el icono de health
 
+
+
+const CHARACTERS =  {
+    ryu: {
+        health: 300,
+        w: RYU_W,
+        h: RYU_H,
+        sprites: {
+            right: "/assets/images/Sprites/Main-character/ryu-right-character.png",
+            left:  "/assets/images/Sprites/Main-character/ryu-left-character.png"
+        }
+    },
+    ken: {
+        health: 300, 
+        w: KEN_W,
+        h: KEN_H, 
+        sprites: {
+            right: "/assets/images/Sprites/Main-character/ken-left-character.png",
+            left: "/assets/images/Sprites/Main-character/ken-right-character.png"
+        }
+    }
+}

@@ -5,10 +5,11 @@ class Enemies {
         this.ctx = ctx; 
         this.x = x;
         this.y = y; 
-        this.w = ENEMY_W;
-        this.h = ENEMY_H; 
+        this.w = ENEMY_W / 2;
+        this.h = ENEMY_H / 2; 
 
         this.vx = ENEMY_VX; 
+        this.health = ENEMY_HEALTH; 
 
         this.sprite = new Image();
         this.sprite.src = sprite; 
@@ -30,12 +31,15 @@ class Enemies {
 
     move () {
         this.x += this.vx
+        if (this.x > CANVAS_W || this.x < 0) {
+            this.isOutOfBounds = true; 
+        }
     }
 
     draw () {
         if (this.sprite.isReady) {
             this.ctx.drawImage (
-                this.ctx, 
+                this.sprite, 
                 this.sprite.vFrameIndex * this.sprite.frameW,
                 this.sprite.hFrameIndex * this.sprite.frameH,
                 this.sprite.frameW,
@@ -46,6 +50,7 @@ class Enemies {
                 this.h
             )
             this.drawCount++
+            this.animate(); 
         }
     }
 
@@ -55,7 +60,6 @@ class Enemies {
             this.sprite.vFrameIndex = (this.sprite.vFrameIndex + 1) % this.sprite.vFrames; 
         }
     }
-
 
 
 }
