@@ -7,11 +7,11 @@ class Game {
         this.canvas.width = CANVAS_W;
         this.canvas.height = CANVAS_H;
 
-        this.player1 = Player1.buildRyu(this.ctx, 50, 280, 'P1');
+        this.player1 = Player.buildRyu(this.ctx, 50, 280, 'P1');
         this.player1.groundTo(this.canvas.height - BG_FLOOR)
 
 
-        this.player2 = new Player2(this.ctx, 700, 300);
+        this.player2 = Player.buildKen(this.ctx, 700, 300, 'P2');
         this.player2.groundTo(this.canvas.height - BG_FLOOR)
 
 
@@ -197,7 +197,7 @@ class Game {
              
             this.healthTimeoutId = setTimeout(() => {
                 const HEALTH_MINY = 150;
-                const HEALTH_MAXY = CANVAS_H - BG_FLOOR - PLAYER1_H  - 50;
+                const HEALTH_MAXY = CANVAS_H - BG_FLOOR - this.player1.h  - 50;
                 this.healthIcon.push(new Health (this.ctx, Math.random()*(this.canvas.width - HEALTH_W), HEALTH_MINY + Math.random() * (HEALTH_MAXY - HEALTH_MINY)))
                 this.healthTimeoutId = undefined;
                 

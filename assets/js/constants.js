@@ -126,8 +126,8 @@ const CHARACTERS =  {
         w: KEN_W,
         h: KEN_H, 
         sprites: {
-            right: "/assets/images/Sprites/Main-character/ken-left-character.png",
-            left: "/assets/images/Sprites/Main-character/ken-right-character.png"
+            right: "/assets/images/Sprites/Main-character/ken-right-character.png",
+            left: "/assets/images/Sprites/Main-character/ken-left-character.png"
         }
     }
 }
