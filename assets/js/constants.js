@@ -49,6 +49,11 @@ const RYU_W = 82;
 const KEN_H = 94;
 const KEN_W = 82;
 
+const SAGAT_H = 94;
+const SAGAT_W = 82;
+
+const BIANKA_H = 94;
+const BIANKA_W = 82;
 
 
 // constantes de velocidad de jugadores
@@ -128,6 +133,23 @@ const CHARACTERS =  {
         sprites: {
             right: "/assets/images/Sprites/Main-character/ken-right-character.png",
             left: "/assets/images/Sprites/Main-character/ken-left-character.png"
+        }
+    },
+    sagat: {
+        health: 300, 
+        w: SAGAT_W,
+        h: SAGAT_H, 
+        sprites: {
+            right: "/assets/images/Sprites/Main-character/sagat-right-character.png",
+            left: "/assets/images/Sprites/Main-character/sagat-left-character.png"
+        }
+    },bianka: {
+        health: 300, 
+        w: BIANKA_W,
+        h: BIANKA_H, 
+        sprites: {
+            right: "/assets/images/Sprites/Main-character/bianka-right-character.png",
+            left: "/assets/images/Sprites/Main-character/bianka-left-character.png"
         }
     }
 }

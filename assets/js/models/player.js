@@ -1,15 +1,12 @@
 class Player {
 
-    static buildRyu(ctx, x, y, mode) {
+    static buildPlayer(ctx, x, y, character, mode) {
+        console.log('character:', character);
         const movements = (mode === 'P1') ? PLAYER_RIGHT_MOVEMENTS : PLAYER_LEFT_MOVEMENTS
-        const sprites = (mode === 'P1') ? {...CHARACTERS.ryu.sprites, direction: 'right'} : {...CHARACTERS.ryu.sprites, direction: 'left'}
-        return new Player (ctx, x, y, movements, sprites, CHARACTERS.ryu)
+        const sprites = (mode === 'P1') ? {...CHARACTERS[character].sprites, direction: 'right'} : {...CHARACTERS[character].sprites, direction: 'left'}
+        return new Player (ctx, x, y, movements, sprites, CHARACTERS[character])
     }
-    static buildKen(ctx, x, y, mode) {
-        const movements = (mode === 'P1') ? PLAYER_RIGHT_MOVEMENTS : PLAYER_LEFT_MOVEMENTS
-        const sprites = (mode === 'P1') ? {...CHARACTERS.ken.sprites, direction: 'right'} : {...CHARACTERS.ken.sprites, direction: 'left'}
-        return new Player (ctx, x, y, movements, sprites, CHARACTERS.ken)
-    }
+   
 
     constructor(ctx, x, y, movements, sprites, character) {
 

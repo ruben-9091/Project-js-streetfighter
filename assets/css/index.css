@@ -3,8 +3,17 @@ body {
   background: url("/assets/images/backgrounds/street-fighter-3.png");
   background-size: cover;
 }
+#main-container {
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+}
 
-#gameContainer {
+#select-p1, #select-p2 {
+    color: white
+}
+
+#game-container {
     position: relative; 
 }
 
@@ -13,9 +22,7 @@ body {
     border: none;
     cursor: pointer; 
 }
-canvas {
-   
-}
+
 
 .w-100 {
     width: 100%;

@@ -1,17 +1,17 @@
 class Game {
 
-    constructor(canvasId) {
+    constructor(canvasId, selectedP1, selectedP2) {
         this.canvas = document.getElementById(canvasId);
         this.ctx = this.canvas.getContext('2d');
 
         this.canvas.width = CANVAS_W;
         this.canvas.height = CANVAS_H;
 
-        this.player1 = Player.buildRyu(this.ctx, 50, 280, 'P1');
+        this.player1 = Player.buildPlayer(this.ctx, 50, 280, selectedP1, 'P1');
         this.player1.groundTo(this.canvas.height - BG_FLOOR)
 
 
-        this.player2 = Player.buildKen(this.ctx, 700, 300, 'P2');
+        this.player2 = Player.buildPlayer(this.ctx, 700, 300, selectedP2, 'P2');
         this.player2.groundTo(this.canvas.height - BG_FLOOR)
 
 
