@@ -172,7 +172,12 @@ class Game {
             }
         })
 
-
+        if (this.player1.isShocking && this.player1.collidesWith(this.player2)) {
+            this.player2.health -= 30;
+            
+        } else if (this.player2.isShocking && this.player2.collidesWith(this.player1)) {
+            this.player1.health -= 30
+        }
     }
 
     clear () {

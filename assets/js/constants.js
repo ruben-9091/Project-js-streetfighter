@@ -16,7 +16,8 @@ const PLAYER_RIGHT_MOVEMENTS = {
     up: 38,
     right: 39,
     down: 40, 
-    attack: 96 
+    attack: 96,
+    attack2: 226
 }
 const PLAYER_LEFT_MOVEMENTS = {
     left: 65,
@@ -24,6 +25,7 @@ const PLAYER_LEFT_MOVEMENTS = {
     right: 68,
     down: 83,
     attack: 81, 
+    attack2: 69
 }
 
 
@@ -122,8 +124,8 @@ const CHARACTERS =  {
         w: RYU_W,
         h: RYU_H,
         sprites: {
-            right: "/assets/images/Sprites/Main-character/ryu-right-character.png",
-            left:  "/assets/images/Sprites/Main-character/ryu-left-character.png"
+            right: "/assets/images/Sprites/Main-character/ryu-right-character3.png",
+            left:  "/assets/images/Sprites/Main-character/ryu-left-character3.png"
         }
     },
     ken: {

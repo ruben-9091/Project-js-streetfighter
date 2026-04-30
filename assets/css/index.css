@@ -7,11 +7,20 @@ body {
     display: flex;
     flex-direction: row; 
     align-items: center;
+    
 }
 
 #select-p1, #select-p2 {
     color: white
 }
+#select-p1 img {
+    background: red;
+}
+#select-p2 img {
+    background: yellow;
+}
+    
+
 
 #game-container {
     position: relative; 

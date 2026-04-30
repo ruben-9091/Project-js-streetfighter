@@ -33,7 +33,7 @@ class Player {
         this.spriteRight = new Image();
         this.spriteRight.src = sprites.right;
         this.spriteRight.vFrames = 3;
-        this.spriteRight.hFrames = 3;
+        this.spriteRight.hFrames = 4;
         this.spriteRight.vFramesIndex = 0;
         this.spriteRight.hFramesIndex = 0;
         this.spriteRight.onload = () => {
@@ -45,7 +45,7 @@ class Player {
         this.spriteLeft = new Image();
         this.spriteLeft.src = sprites.left;
         this.spriteLeft.vFrames = 3;
-        this.spriteLeft.hFrames = 3;
+        this.spriteLeft.hFrames = 4;
         this.spriteLeft.vFramesIndex = 0;
         this.spriteLeft.hFramesIndex = 0;
         this.spriteLeft.onload = () => {
@@ -104,6 +104,11 @@ class Player {
                 this.isAttack = isPressed && !this.isAttack;
 
                 break;
+
+            case this.movements.attack2:
+                
+                this.isShocking = isPressed && !this.isAttack;
+                break; 
         }
     }
 
@@ -159,7 +164,12 @@ class Player {
             this.sprite.vFramesIndex = 1;
             this.sprite.hFramesIndex = 2;
 
+        } else if (this.isShocking) {
 
+            this.sprite.vFramesIndex = 1;
+            this.sprite.hFramesIndex = 3;
+
+    
         } else if (this.vx !== 0) {
 
             this.sprite.hFramesIndex = 0;
