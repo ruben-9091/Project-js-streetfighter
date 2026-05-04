@@ -1,3 +1,4 @@
+
 class Game {
 
     constructor(canvasId, selectedP1, selectedP2) {
@@ -42,6 +43,7 @@ class Game {
     addEventListener('keydown', (event) => {
 
         this.player1.onKeyEvent(event)
+        this.player2.onKeyEvent(event)
 
         if (event.keyCode === KEY_0) {
             const kame = this.player1.shootKame();
@@ -49,22 +51,19 @@ class Game {
                 this.kames.push(kame)
             }
         }
-    })
-    
-        
-    addEventListener('keyup', (event) => this.player1.onKeyEvent(event))
 
-   addEventListener('keydown', (event) => {
-
-        this.player2.onKeyEvent(event)
-
+         
         if (event.keyCode === KEY_Q) {
             const kame = this.player2.shootKame();
             if (kame) {
                 this.kames.push(kame)
             }
         }
+
+
     })
+        
+    addEventListener('keyup', (event) => this.player1.onKeyEvent(event))
     addEventListener('keyup', (event) => this.player2.onKeyEvent(event))
     }
 
@@ -74,8 +73,8 @@ class Game {
         if(!this.drawIntervalID) {
             this.drawIntervalID = setInterval(() => {
                 this.clear(); 
+                this.checkCollisions();
                 this.move();
-                this.checkCollisions(); 
                 this.draw();
                 this.generateElements(); 
                 this.checkGameOver(); 
@@ -110,8 +109,9 @@ class Game {
         this.kames.forEach(kame => kame.move())
         this.enemies.forEach(enemy => enemy.move())
 
-        this.kames.filter (kame => !kame.isOutOfBounds); 
-        this.enemies.filter (enemy => !enemy.isOutOfBounds);
+        this.kames = this.kames.filter(kame => !kame.isOutOfBounds);
+        this.enemies = this.enemies.filter(enemy => !enemy.isOutOfBounds);
+
 
         this.checkBounds();
         }
@@ -172,12 +172,12 @@ class Game {
             }
         })
 
-        if (this.player1.isShocking && this.player1.collidesWith(this.player2)) {
-            this.player2.health -= 30;
+        if (this.player1.isHitting && this.player1.collidesWith(this.player2)) {      
+            this.player2.takeDamage(30);
             
-        } else if (this.player2.isShocking && this.player2.collidesWith(this.player1)) {
-            this.player1.health -= 30
-        }
+        } else if (this.player2.isHitting && this.player2.collidesWith(this.player1)) {
+            this.player1.takeDamage(30);
+    }
     }
 
     clear () {

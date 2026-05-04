@@ -59,6 +59,7 @@ class Player {
         this.drawCount = 0;
 
         this.isDamaged = false;
+        this.hitTimer = 0; 
 
 
 
@@ -72,6 +73,7 @@ class Player {
 
     onKeyEvent(event) {
         const isPressed = event.type === 'keydown';
+        console.log('keyCode:', event.keyCode);
         switch (event.keyCode) {
             case this.movements.left:
                 if (isPressed) {
@@ -106,8 +108,9 @@ class Player {
                 break;
 
             case this.movements.attack2:
-                
-                this.isShocking = isPressed && !this.isAttack;
+                if (isPressed)
+                this.isHitting = true;
+                this.hitTimer = 10; 
                 break; 
         }
     }
@@ -164,12 +167,19 @@ class Player {
             this.sprite.vFramesIndex = 1;
             this.sprite.hFramesIndex = 2;
 
-        } else if (this.isShocking) {
+        } else if (this.isHitting) {
 
             this.sprite.vFramesIndex = 1;
             this.sprite.hFramesIndex = 3;
 
-    
+                if (this.hitTimer > 0) {
+                this.hitTimer--;
+                    if (this.hitTimer === 0) {
+                        this.isHitting = false;
+                    }
+                }
+        
+
         } else if (this.vx !== 0) {
 
             this.sprite.hFramesIndex = 0;
@@ -182,6 +192,7 @@ class Player {
             this.sprite.vFramesIndex = 0;
             this.sprite.hFramesIndex = 0;
         }
+       
     }
 
     shootKame() {

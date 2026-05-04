@@ -17,7 +17,7 @@ const PLAYER_RIGHT_MOVEMENTS = {
     right: 39,
     down: 40, 
     attack: 96,
-    attack2: 226
+    attack2: 97
 }
 const PLAYER_LEFT_MOVEMENTS = {
     left: 65,
@@ -133,8 +133,8 @@ const CHARACTERS =  {
         w: KEN_W,
         h: KEN_H, 
         sprites: {
-            right: "/assets/images/Sprites/Main-character/ken-right-character.png",
-            left: "/assets/images/Sprites/Main-character/ken-left-character.png"
+            right: "/assets/images/Sprites/Main-character/ken-right-character2.png",
+            left: "/assets/images/Sprites/Main-character/ken-left-character2.png"
         }
     },
     sagat: {
@@ -142,16 +142,16 @@ const CHARACTERS =  {
         w: SAGAT_W,
         h: SAGAT_H, 
         sprites: {
-            right: "/assets/images/Sprites/Main-character/sagat-right-character.png",
-            left: "/assets/images/Sprites/Main-character/sagat-left-character.png"
+            right: "/assets/images/Sprites/Main-character/sagat-right-character-2.png",
+            left: "/assets/images/Sprites/Main-character/sagat-left-character-2.png"
         }
     },bianka: {
         health: 300, 
         w: BIANKA_W,
         h: BIANKA_H, 
         sprites: {
-            right: "/assets/images/Sprites/Main-character/bianka-right-character.png",
-            left: "/assets/images/Sprites/Main-character/bianka-left-character.png"
+            right: "/assets/images/Sprites/Main-character/bianka-right-character-2.png",
+            left: "/assets/images/Sprites/Main-character/bianka-left-character-2.png"
         }
     }
 }
