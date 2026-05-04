@@ -37,6 +37,7 @@ class Game {
         this.fps = FPS;
 
         this.coinTimeOutID = undefined;
+        this.setupListeners();
     }
 
     setupListeners() {
@@ -69,7 +70,7 @@ class Game {
 
 
     start() {
-        this.setupListeners();
+        
         if(!this.drawIntervalID) {
             this.drawIntervalID = setInterval(() => {
                 this.clear(); 
@@ -260,14 +261,16 @@ class Game {
 
         if (this.player2.health <= 0) {
             winner = "PLAYER 1 WINS!"
-            this.ctx.fillStyle = 'blue';
+            this.ctx.fillStyle = '#00aaff';
             
         } else if (this.player1.health <= 0) {
             winner = "PLAYER 2 WINS!"
-            this.ctx.fillStyle = 'red';
+            this.ctx.fillStyle = '#f14a4a';
             
         }
-       
+
+        this.ctx.shadowColor = this.ctx.fillStyle;
+        this.ctx.shadowBlur = 25;
         this.ctx.font = 'bold 40px Arial';
         this.ctx.fillText(winner, this.canvas.width / 2 + 150, this.canvas.height / 2 + 200);
 

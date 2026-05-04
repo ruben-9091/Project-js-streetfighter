@@ -23,6 +23,21 @@ addEventListener('DOMContentLoaded', () => {
   document.getElementById("sagatP2").onclick = () => {selectedP2 = 'sagat'}
 
 
+  
+  function setupCharacterSelection(player) {
+    const buttons = document.querySelectorAll(`#select-${player} .character`);
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            buttons.forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+        });
+    });
+  }
+
+  setupCharacterSelection("p1");
+  setupCharacterSelection("p2");
+
 
 
 
