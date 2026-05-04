@@ -79,13 +79,15 @@ const KEY_UP = 38;
 const KEY_RIGHT = 39;
 const KEY_DOWN = 40; 
 const KEY_0 = 96; 
+const KEY_1 = 97;
 
 
 const KEY_A = 65;
 const KEY_D = 68;
 const KEY_S = 83;
 const KEY_W = 87;
-const KEY_Q = 81; 
+const KEY_Q = 81;
+const KEY_E = 69; 
 
 //constantes para clase health
 const HEALTH = 30; 
@@ -95,13 +97,22 @@ const HEALTH_SRC = "/assets/images/Sprites/health/hearth-icon.png"
 const HEALTH_ANIMATION_FREQ = 5; 
 
 //constantes para clase kame
-const KAME = 80; 
+const KAME = 50; 
 const KAME_W = 66;
 const KAME_H = 38; 
-const KAME_SRC = "/assets/images/Sprites/kame-icon/kame-icon.png"
+const KAME_RIGHT_SRC = "/assets/images/Sprites/kame-icon/kame-icon-right.png"
+const KAME_LEFT_SRC = "/assets/images/Sprites/kame-icon/kame-icon-left.png"
 const KAME_ANIMATION_FREQ = 5;
 const KAME_VX = 5;  
 
+//constantes para clase Kame2
+const KAME2 = 90; 
+const KAME2_W = 66;
+const KAME2_H = 38; 
+const KAME2_RIGHT_SRC = "/assets/images/Sprites/kame-icon/kame-sagat-right.png"
+const KAME2_LEFT_SRC = "/assets/images/Sprites/kame-icon/kame-sagat-left.png"
+const KAME2_ANIMATION_FREQ = 5;
+const KAME2_VX = 5; 
 
 
 const MAX_INGAME_HEALTHICON = 1; 

@@ -27,7 +27,7 @@ class Kame {
             this.spriteRigth.frameH = Math.floor (this.spriteRigth.height/this.spriteRigth.hFrames); 
         }
 
-        this.spriteRigth.src = "/assets/images/Sprites/kame-icon/kame-icon-right.png";
+        this.spriteRigth.src = KAME_RIGHT_SRC;
 
         this.spriteLeft = new Image();
         
@@ -42,7 +42,7 @@ class Kame {
             this.spriteLeft.frameH = Math.floor (this.spriteLeft.height/this.spriteLeft.hFrames);
             }
 
-        this.spriteLeft.src = "/assets/images/Sprites/kame-icon/kame-icon-left.png"; 
+        this.spriteLeft.src = KAME_LEFT_SRC; 
 
         this.sprite = vx > 0 ? this.spriteRigth : this.spriteLeft;
 

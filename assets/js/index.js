@@ -4,6 +4,11 @@ addEventListener('DOMContentLoaded', () => {
   const btnStart = document.getElementById("startBtn")
 
   btnStart.onclick = () => {
+    if (!selectedP1 || !selectedP2) {
+      alert ("SELECCIONA UN PERSONAJE")
+      return; 
+    }
+
     btnStart.style.display = "none"
     game = new Game('streetFighter', selectedP1, selectedP2)
     game.start();
@@ -23,7 +28,7 @@ addEventListener('DOMContentLoaded', () => {
   document.getElementById("sagatP2").onclick = () => {selectedP2 = 'sagat'}
 
 
-  
+
   function setupCharacterSelection(player) {
     const buttons = document.querySelectorAll(`#select-${player} .character`);
 
@@ -45,8 +50,8 @@ addEventListener('DOMContentLoaded', () => {
   const btnReset = document.getElementById("restartBtn")
 
   btnReset.onclick = () => {
-    btnStart.style.display = "block"
-    game.reset();
+    location.reload();
   }
+  
   
 });

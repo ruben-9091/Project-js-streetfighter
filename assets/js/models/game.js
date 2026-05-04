@@ -28,6 +28,7 @@ class Game {
         this.healthTimeoutId = undefined; 
 
         this.kames = []; 
+        this.superKames = [];
 
         this.enemies = [];
         this.enemiesTimeoutId = undefined; 
@@ -58,6 +59,21 @@ class Game {
             const kame = this.player2.shootKame();
             if (kame) {
                 this.kames.push(kame)
+            }
+        }
+
+        if (event.keyCode === KEY_1) {
+            const kame2 = this.player1.shootSuperKame();
+            if (kame2) {
+                this.kames.push(kame2)
+            }
+        }
+
+         
+        if (event.keyCode === KEY_E) {
+            const kame2 = this.player2.shootSuperKame();
+            if (kame2) {
+                this.kames.push(kame2)
             }
         }
 
@@ -111,6 +127,7 @@ class Game {
         this.enemies.forEach(enemy => enemy.move())
 
         this.kames = this.kames.filter(kame => !kame.isOutOfBounds);
+        this.superKames = this.superKames.filter(superkame => !superkame.isOutOfBounds);
         this.enemies = this.enemies.filter(enemy => !enemy.isOutOfBounds);
 
 
@@ -161,6 +178,18 @@ class Game {
             }
         })
 
+        this.superKames = this.superKames.filter ((superkame) => {
+            if (this.player1.collidesWith(superkame)) {
+                this.player1.takeDamage (superkame.damage)
+                return false;
+            } else if (this.player2.collidesWith(superkame)){
+                this.player2.takeDamage (superkame.damage)
+                return false; 
+            } else {
+                return true; 
+            }
+        })
+
         this.enemies = this.enemies.filter ((enemy) => {
             if (this.player1.collidesWith(enemy)) {
                 this.player1.health -= enemy.health
@@ -190,6 +219,7 @@ class Game {
         this.player1.draw();
         this.player2.draw();
         this.kames.forEach(kame => kame.draw());
+        this.superKames.forEach(superkame => superkame.draw())
         this.healthIcon.forEach(health => health.draw()); 
         this.enemies.forEach(enemy => enemy.draw())
         

@@ -59,7 +59,7 @@ class Player {
         this.drawCount = 0;
 
         this.isDamaged = false;
-        this.hitTimer = 0; 
+     
 
 
 
@@ -108,9 +108,8 @@ class Player {
                 break;
 
             case this.movements.attack2:
-                if (isPressed)
-                this.isHitting = true;
-                this.hitTimer = 10; 
+                this.isSuperAttack = isPressed && !this.isSuperAttack;
+
                 break; 
         }
     }
@@ -167,17 +166,10 @@ class Player {
             this.sprite.vFramesIndex = 1;
             this.sprite.hFramesIndex = 2;
 
-        } else if (this.isHitting) {
+        } else if (this.isSuperAttack) {
 
             this.sprite.vFramesIndex = 1;
             this.sprite.hFramesIndex = 3;
-
-                if (this.hitTimer > 0) {
-                this.hitTimer--;
-                    if (this.hitTimer === 0) {
-                        this.isHitting = false;
-                    }
-                }
         
 
         } else if (this.vx !== 0) {
@@ -200,6 +192,14 @@ class Player {
             return new Kame(this.ctx, (this.x + this.w + 20), this.y + this.h / 3.5, KAME_VX)
         } else if (this.sprite === this.spriteLeft) {
             return new Kame(this.ctx, this.x - this.w + 50, this.y + this.h / 3.5, -KAME_VX)
+        }
+    }
+
+    shootSuperKame() {
+        if (this.sprite === this.spriteRight) {
+            return new Kame2(this.ctx, (this.x + this.w + 20), this.y + this.h / 3.5, KAME2_VX)
+        } else if (this.sprite === this.spriteLeft) {
+            return new Kame2(this.ctx, this.x - this.w + 50, this.y + this.h / 3.5, -KAME2_VX)
         }
     }
 
