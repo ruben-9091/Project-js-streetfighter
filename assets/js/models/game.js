@@ -65,7 +65,7 @@ class Game {
         if (event.keyCode === KEY_1) {
             const kame2 = this.player1.shootSuperKame();
             if (kame2) {
-                this.kames.push(kame2)
+                this.superKames.push(kame2)
             }
         }
 
@@ -73,7 +73,7 @@ class Game {
         if (event.keyCode === KEY_E) {
             const kame2 = this.player2.shootSuperKame();
             if (kame2) {
-                this.kames.push(kame2)
+                this.superKames.push(kame2)
             }
         }
 
@@ -124,6 +124,7 @@ class Game {
             }
             }
         this.kames.forEach(kame => kame.move())
+        this.superKames.forEach(superkame => superkame.move());
         this.enemies.forEach(enemy => enemy.move())
 
         this.kames = this.kames.filter(kame => !kame.isOutOfBounds);
@@ -178,6 +179,24 @@ class Game {
             }
         })
 
+         this.superKames = this.superKames.filter(superkame => {
+            let hit = false;
+
+            this.enemies = this.enemies.filter(enemy => {
+                if (superkame.collidesWith(enemy)) {
+                    enemy.health -= superkame.damage;
+
+                    if (enemy.health <= 0) {
+                        return false; 
+                    }
+                    hit = true; 
+                    return true;
+                }
+                return true; 
+            });
+            return !hit; 
+        });
+
         this.superKames = this.superKames.filter ((superkame) => {
             if (this.player1.collidesWith(superkame)) {
                 this.player1.takeDamage (superkame.damage)
@@ -201,6 +220,8 @@ class Game {
                 return true; 
             }
         })
+
+       
 
         if (this.player1.isHitting && this.player1.collidesWith(this.player2)) {      
             this.player2.takeDamage(30);

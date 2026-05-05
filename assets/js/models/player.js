@@ -1,7 +1,7 @@
 class Player {
 
     static buildPlayer(ctx, x, y, character, mode) {
-        console.log('character:', character);
+        
         const movements = (mode === 'P1') ? PLAYER_RIGHT_MOVEMENTS : PLAYER_LEFT_MOVEMENTS
         const sprites = (mode === 'P1') ? {...CHARACTERS[character].sprites, direction: 'right'} : {...CHARACTERS[character].sprites, direction: 'left'}
         return new Player (ctx, x, y, movements, sprites, CHARACTERS[character])
@@ -73,7 +73,7 @@ class Player {
 
     onKeyEvent(event) {
         const isPressed = event.type === 'keydown';
-        console.log('keyCode:', event.keyCode);
+       
         switch (event.keyCode) {
             case this.movements.left:
                 if (isPressed) {
@@ -134,6 +134,11 @@ class Player {
     }
 
     draw() {
+
+        if (this.isDamaged && this.drawCount % 6 < 3) {
+        this.drawCount++;
+        return;
+    }
         if (this.sprite.isReady) {
             this.ctx.drawImage(
                 this.sprite,

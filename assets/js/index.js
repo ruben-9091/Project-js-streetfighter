@@ -4,7 +4,7 @@ addEventListener('DOMContentLoaded', () => {
   const btnStart = document.getElementById("startBtn")
   const music = new Audio('/assets/music/Street-Fighter-II-Arcade-Music.mp3');
     music.loop = true;
-    music.volume = 0.5;
+    music.volume = 0.2;
 
   btnStart.onclick = () => {
     if (!selectedP1 || !selectedP2) {
